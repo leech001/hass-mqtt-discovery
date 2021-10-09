@@ -3,7 +3,7 @@ import json
 import paho.mqtt.client as mqtt
 
 
-class MqttSensor:
+class Sensor:
     def __init__(self, client: mqtt.Client, name, unit_of_measurement, icon):
         self.client = client
         self.name = name
@@ -28,7 +28,7 @@ class MqttSensor:
         self.client.publish(f"{self.topic}/state", str(value))
 
 
-class MqttTracker:
+class Tracker:
     def __init__(self, client: mqtt.Client, name):
         self.client = client
         self.name = name
@@ -57,7 +57,7 @@ class MqttTracker:
         self.client.publish(f"{self.topic}/attributes", json.dumps(_payload))
 
 
-class MqttBinary:
+class Binary:
     def __init__(self, client: mqtt.Client, name, icon):
         self.client = client
         self.name = name
