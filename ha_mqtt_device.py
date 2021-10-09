@@ -1,6 +1,26 @@
 import json
+import yaml
 
 import paho.mqtt.client as mqtt
+
+
+class Device(dict):
+    __slots__ = ()
+
+    def __init__(self, name, sw_version, model, manufacturer):
+        super().__init__()
+
+        self["name"] = name
+        self["sw_version"] = sw_version
+        self["model"] = model
+        self["manufacturer"] = manufacturer
+
+    @staticmethod
+    def from_config(config_yaml_path):
+        with open(config_yaml_path) as file:
+            device_config = yaml.safe_load(file)
+            device = Device(**device_config)
+            return device
 
 
 class Sensor:
