@@ -4,11 +4,12 @@ import yaml
 import paho.mqtt.client as mqtt
 
 
-class Device(dict):
-    __slots__ = ()
 
+class Device(dict):
     def __init__(self, name, sw_version, model, manufacturer):
         super().__init__()
+
+        self.name = name
 
         self["name"] = name
         self["sw_version"] = sw_version
