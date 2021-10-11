@@ -71,8 +71,11 @@ class Sensor(Component):
             json.dumps(_config),
         ).wait_for_publish()
 
-    def send(self, value):
-        self.client.publish(f"{self.topic}/state", str(value))
+    def send(self, value, blocking=False):
+        message_info = self.client.publish(f"{self.topic}/state", value)
+
+        if blocking:
+            message_info.wait_for_publish()
 
 
 class Tracker:
