@@ -66,11 +66,10 @@ class Sensor(Component):
         if self.icon:
             _config["icon"] = self.icon
 
-        mqtt_mi = self.client.publish(
+        self.client.publish(
             f"{DISCOVERY_PREFIX}/{self.component}/{self.parent_device.name}/{self.object_id}/config",
             json.dumps(_config),
-        )
-        mqtt_mi.wait_for_publish()
+        ).wait_for_publish()
 
     def send(self, value):
         self.client.publish(f"{self.topic}/state", str(value))
