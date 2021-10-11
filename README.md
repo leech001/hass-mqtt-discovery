@@ -1,6 +1,7 @@
 # HASS-MQTT-DISCOVERY
 
-Python class library for generating and sending data to the Home Assistant via MQTT (AutoDiscovery) of data from sensors and devices
+Python class library for generating and sending data to the Home Assistant via
+MQTT (AutoDiscovery) of data from sensors and devices.
 
 ## Install
 ```Python
