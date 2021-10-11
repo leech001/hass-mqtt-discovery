@@ -60,7 +60,6 @@ class Sensor(Component):
             "name": self.name,
             "state_topic": "~/state",
             "unit_of_measurement": self.unit_of_measurement,
-            "icon": self.icon,
             "device": self.parent_device,
         }
 
