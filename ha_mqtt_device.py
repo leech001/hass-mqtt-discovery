@@ -30,6 +30,10 @@ class Device(dict):
 class Component:
     def __init__(self, name):
         self.component = name
+        self.value_read_function = None
+ 
+    def set_value_read_function(self, function):
+        self.value_read_function = function
 
 
 class Sensor(Component):
@@ -71,8 +75,16 @@ class Sensor(Component):
             json.dumps(_config),
         ).wait_for_publish()
 
-    def send(self, value, blocking=False):
-        message_info = self.client.publish(f"{self.topic}/state", value)
+    def send(self, value=None, blocking=False):
+        if not value:
+            if not self.value_read_function:
+                raise ValueError("Set either value or value_read_function")
+
+            publish_value = self.value_read_function()
+        else:
+            publish_value = value
+
+        message_info = self.client.publish(f"{self.topic}/state", publish_value)
 
         if blocking:
             message_info.wait_for_publish()
