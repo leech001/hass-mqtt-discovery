@@ -1,10 +1,17 @@
 import json
+import logging
+import os
 import yaml
 
 import paho.mqtt.client as mqtt
 
 
 DISCOVERY_PREFIX = "homeassistant"
+
+
+logger = logging.getLogger(__name__)
+if "DEBUG" in os.environ:
+    logger.setLevel(logging.DEBUG)
 
 
 class Device(dict):
@@ -31,7 +38,7 @@ class Component:
     def __init__(self, name):
         self.component = name
         self.value_read_function = None
- 
+
     def set_value_read_function(self, function):
         self.value_read_function = function
 
@@ -83,6 +90,8 @@ class Sensor(Component):
             publish_value = self.value_read_function()
         else:
             publish_value = value
+
+        logger.debug(f"{self.topic}: {publish_value}")
 
         message_info = self.client.publish(f"{self.topic}/state", publish_value)
 
