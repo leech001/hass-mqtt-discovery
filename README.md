@@ -41,6 +41,24 @@ inside_temperature_sensor.send(22)
 outside_temperature_sensor.send(5)
 ```
 
+#### Component value read function
+
+If the hardware sensor is used solely to publish to mqtt, the `Sensor` can fetch
+the value by itself so keeping a reference to both the hardware and the mqtt
+sensor is not required.
+
+For example:
+
+```python
+inside_temperature_sensor.set_value_read_function(lambda: round(hardware_sensor.temperature, 2))
+```
+
+From here publishing to the mqtt server would be:
+
+```python
+inside_temperature_sensor.send()
+```
+
 ### Device tracker
 ```Python
 HA_gps = Tracker(mqtt_client, "MotoBoard GPS")
