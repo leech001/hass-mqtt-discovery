@@ -83,7 +83,7 @@ class Sensor(Component):
         ).wait_for_publish()
 
     def send(self, value=None, blocking=False):
-        if not value:
+        if value is None:
             if not self.value_read_function:
                 raise ValueError("Set either value or value_read_function")
 
