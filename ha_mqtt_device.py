@@ -80,6 +80,7 @@ class Sensor(Component):
         self.client.publish(
             f"{DISCOVERY_PREFIX}/{self.component}/{self.parent_device.name}/{self.object_id}/config",
             json.dumps(_config),
+            retain=True,
         ).wait_for_publish()
 
     def send(self, value=None, blocking=False):
