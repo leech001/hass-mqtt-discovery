@@ -1,3 +1,4 @@
+## From https://github.com/leech001/hass-mqtt-discovery
 import json
 import logging
 import os
@@ -52,12 +53,14 @@ class Sensor(Component):
         unit_of_measurement,
         icon=None,
         topic_parent_level="",
+        force_update = False
     ):
         super().__init__("sensor")
 
         self.client = client
         self.name = name
         self.parent_device = parent_device
+        self.force_update = force_update
         self.object_id = self.name.replace(" ", "_").lower()
         self.unit_of_measurement = unit_of_measurement
         self.icon = icon
@@ -72,6 +75,7 @@ class Sensor(Component):
             "state_topic": "~/state",
             "unit_of_measurement": self.unit_of_measurement,
             "device": self.parent_device,
+            "force_update": self.force_update
         }
 
         if self.icon:
