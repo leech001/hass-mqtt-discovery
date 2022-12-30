@@ -6,6 +6,7 @@ import yaml
 import paho.mqtt.client as mqtt
 
 
+
 DISCOVERY_PREFIX = "homeassistant"
 
 
