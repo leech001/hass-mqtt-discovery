@@ -1,14 +1,11 @@
 import json
 import logging
 import os
-import yaml
 
 import paho.mqtt.client as mqtt
-
-
+import yaml
 
 DISCOVERY_PREFIX = "homeassistant"
-
 
 logger = logging.getLogger(__name__)
 if "DEBUG" in os.environ:
@@ -46,14 +43,14 @@ class Component:
 
 class Sensor(Component):
     def __init__(
-        self,
-        client: mqtt.Client,
-        name,
-        parent_device,
-        unit_of_measurement,
-        icon=None,
-        topic_parent_level="",
-        force_update = False
+            self,
+            client: mqtt.Client,
+            name,
+            parent_device,
+            unit_of_measurement,
+            icon=None,
+            topic_parent_level="",
+            force_update=False
     ):
         super().__init__("sensor")
 
