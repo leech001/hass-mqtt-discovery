@@ -3,9 +3,21 @@
 Python class library for generating and sending data to the Home Assistant via
 MQTT (AutoDiscovery) of data from sensors and devices.
 
-## Install
+## Build and Install
+### build wheel: 
+
+    # from top folder: 
+    pip install -e .
+    flit build
+
+### install wheel:
+       
+    # inside dist folder:
+    pip install hass_mqtt_discovery
+
+## Usage
 ```Python
-from HaMqttDevice import *
+from hass
 
 mqtt_client = mqtt.Client("user")
 mqtt_client.on_connect = on_connect
@@ -14,8 +26,6 @@ mqtt_client.username_pw_set("user", "pass")
 mqtt_client.connect("mqtt.mqtt.ru", 1883, 60)
 mqtt_client.loop_forever()
 ```
-
-## Usage
 
 ### Sensor
 ```Python

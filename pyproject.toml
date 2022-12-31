@@ -1,0 +1,36 @@
+[project]
+    name = "hass_mqtt_discovery"
+    description = "tbd"
+    version = "1.0.0.dev0"
+    readme = "README.md"
+    requires-python = ">=3.7"
+    #authors = [
+    #    { name = "", email = "" }
+    #]
+
+    dependencies = [
+        "paho-mqtt",
+        "pyyaml"
+    ]
+
+[project.scripts]
+    flit = "flit:main"
+
+
+[project.optional-dependencies]
+    dev = [
+        "pylint ~=2.14.0",
+    ]
+    test = [
+        "pytest-cov ~=3.0.0",
+    ]
+
+[build-system]
+    build-backend = "flit_core.buildapi"
+    requires = ["flit_core >=3.8.0,<4"]
+
+[tool.pytest.ini_options]
+    addopts = "--cov --cov-report html --cov-report term-missing --cov-fail-under 95"
+
+[tool.coverage.run]
+    source = ["src"]
